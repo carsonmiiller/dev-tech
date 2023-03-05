@@ -14,7 +14,7 @@ class ThisAndThatJDBC{
                             + "  " + rsThat.getString(3)
                             + "  " + rsThat.getInt(4)
                 );
-                String thisQuery = "select * from This where This_pk = " + foreignKeyToThis + "'";
+                String thisQuery = "select * from This where This_pk = '" + foreignKeyToThis + "'";
                 System.out.println(thisQuery);
                 Statement thisStmt = dbCxn.createStatement();
                 ResultSet rsThis = thisStmt.executeQuery(thisQuery);

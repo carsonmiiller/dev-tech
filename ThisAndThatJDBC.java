@@ -6,7 +6,7 @@ class ThisAndThatJDBC{
                 "jdbc:mysql://localhost:43306/ThisAndThat", "root", "tatdat4"
             );
             Statement selectThis=dbCxn.createStatement();
-            ResultSet rsThat=selectThis.executeQuery("select * from This");
+            ResultSet rsThat=selectThis.executeQuery("select * from That");
             while(rsThat.next()){
                 int foreignKeyToThis = rsThat.getInt(4);
                 System.out.println(rsThat.getInt(1)

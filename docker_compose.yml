@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  db2:
+    image: mysql/mysql-server:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: tatdat4
+      MYSQL_DATABASE: ThisAndThat
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - tatdat4:/var/lib/mysql
+    ports:
+      - "43306:3306"
+volumes:
+  tatdat4:

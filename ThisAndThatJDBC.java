@@ -6,13 +6,13 @@ class ThisAndThatJDBC{
                 "jdbc:mysql://localhost:43306/ThisAndThat", "root", "tatdat4"
             );
             Statement selectThis=dbCxn.createStatement();
-            ResultSet rsThis=selectThis.executeQuery("select * from This");
-            while(rsThis.next()){
+            ResultSet rsThat=selectThis.executeQuery("select * from This");
+            while(rsThat.next()){
                 int foreignKeyToThis = rsThat.getInt(4);
-                System.out.println(rsThis.getInt(1)
-                            + "  " + rsThis.getString(2)
-                            + "  " + rsThis.getString(3)
-                            + "  " + rsThis.getInt(4)
+                System.out.println(rsThat.getInt(1)
+                            + "  " + rsThat.getString(2)
+                            + "  " + rsThat.getString(3)
+                            + "  " + rsThat.getInt(4)
                 );
                 String thisQuery = "select * from This where This_pk = " + foreignKeyToThis + "'";
                 System.out.println(thisQuery);

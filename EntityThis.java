@@ -8,11 +8,15 @@ import java.sql.*;
  * @version: 2023.03.24
  */
 public class EntityThis{
+    private enum This_jkl {
+        x, y, z;
+    }
     private int primaryKey;
     private String This_abc;
     private int This_def;
-    private String This_ghi;
-    private String This_jkl;
+    private java.sql.Date This_ghi;
+    private This_jkl This_jkl;
+    
 
     /**
      * This is an empty constructor for the EntityThis class.
@@ -40,11 +44,11 @@ public class EntityThis{
     public int getThis_def(){return This_def;}
     public void setThis_def(int This_def){this.This_def = This_def;}
 
-    public String getThis_ghi(){return This_ghi;}
-    public void setThis_ghi(String This_ghi){this.This_ghi = This_ghi;}
+    public java.sql.Date getThis_ghi(){return This_ghi;}
+    public void setThis_ghi(java.sql.Date This_ghi){this.This_ghi = This_ghi;}
 
-    public String getThis_jkl(){return This_jkl;}
-    public void setThis_jkl(String This_jkl){this.This_jkl = This_jkl;}
+    public This_jkl getThis_jkl(){return This_jkl;}
+    public void setThis_jkl(This_jkl This_jkl){this.This_jkl = This_jkl;}
 
     /**
      * This method executes an INSERT INTO statement on the This table.

@@ -17,7 +17,8 @@ public class EntityThis{
     /**
      * This is an empty constructor for the EntityThis class.
      * It is used to create an instance of the class without initializing
-     * any of the instance variables.
+     * any of the instance variables. This constructor is called when creating
+     * a new instance of the class to be inserted into the database.
      * @return an instance of the EntityThis class
      */
     public EntityThis(){}
@@ -81,6 +82,8 @@ public class EntityThis{
 
     /**
      * This method calls create() or update(), whichever is appropriate.
+     * create() is called if the primaryKey value does not exist in the This table
+     * update() is called if the primaryKey value exists in the This table
      */
     public void save(){}
 
@@ -92,6 +95,7 @@ public class EntityThis{
 
     /**
      * This method calls delete().
+     * It removes the record for this instance of the EntityThis class from the This table
      */
     public void remove(){}
 }

@@ -88,12 +88,6 @@ public class EntityThisTest {
     }
 
     @Test
-    public void readThrowsExceptionWhenCalledWithNonExisitingPK(){
-        EntityThis entityThis = new EntityThis();
-        assertFalse(entityThis.read(1000));
-    }
-
-    @Test
     public void updateStoresInstanceVariablesInTableWhenCalled(){
         EntityThis entityThis = new EntityThis();
         entityThis.read(2);
@@ -128,5 +122,23 @@ public class EntityThisTest {
         entityThis.setJkl(jkl);
         assertFalse(entityThis.update());
     }
+
+    @Test
+    public void deleteRemovesAppropriateRecordFromTable(){
+        EntityThis entityThis = new EntityThis();
+        entityThis.read(2);
+        entityThis.delete();
+        assertFalse(entityThis.load(2));
+    }
+
+    @Test
+    public void deleteThrowsExceptionWhenCalledWithNonexisitentPK(){
+        EntityThis entityThis = new EntityThis();
+        entityThis.read(2);
+        entityThis.delete();
+        assertFalse(entityThis.delete());
+    }
+    
+
 }
 

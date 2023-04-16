@@ -86,5 +86,47 @@ public class EntityThisTest {
             fail("create() returned false, the insert statement threw an exception");
         }
     }
+
+    @Test
+    public void readThrowsExceptionWhenCalledWithNonExisitingPK(){
+        EntityThis entityThis = new EntityThis();
+        assertFalse(entityThis.read(1000));
+    }
+
+    @Test
+    public void updateStoresInstanceVariablesInTableWhenCalled(){
+        EntityThis entityThis = new EntityThis();
+        entityThis.read(2);
+        String newAbc = entityThis.getAbc() + "abc";
+        entityThis.setAbc(newAbc);
+        int newDef = entityThis.getDef() + 1;
+        entityThis.setDef(newDef);
+        java.util.Date newDate = new java.util.Date();
+        entityThis.setGhi(newDate);
+        JKLValues newJkl = JKLValues[entityThis.getJkl().ordinal() + 1]; // making an assumption about enum syntax and operation here
+        entityThis.setJkl(newJkl);
+        boolean updateRetVal = entityThis.update();
+        if(updateRetVal){
+            entityThis.read(entityThis.primaryKey());
+            assertEquals(newAbc, entityThis.getAbc());
+            assertEquals(newDef, entityThis.getDef());
+            assertEquals(newDate, entityThis.getGhi());
+            assertEquals(newJkl, entityThis.getJkl());
+        } else {
+            fail("update() returned false, the update statement threw an exception");
+        }
+    }
+
+    @Test
+    public void updateThrowsExceptionWhenCalledWithNonExisitingPK(){
+        EntityThis entityThis = new EntityThis();
+        entityThis.setAbc("abc");
+        entityThis.setDef(25);
+        java.util.Date date = new java.util.Date();
+        entityThis.setGhi(date);
+        JKLValues jkl = JKLValues.X;
+        entityThis.setJkl(jkl);
+        assertFalse(entityThis.update());
+    }
 }
 

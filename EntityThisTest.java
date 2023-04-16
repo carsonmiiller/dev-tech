@@ -1,4 +1,7 @@
 import org.junit.jupiter.api.*;
+
+import EntityThis.JKLValues;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -10,27 +13,18 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EntityThisTest {
     // <function><desired-behavior>when<condition>
 
-    /**
-     * This method tests that primaryKeyColumnName() returns the correct value.
-     */
     @Test
     public void primaryKeyColumnNameReturnsCorrectValueWhenCalled() {
         EntityThis entityThis = new EntityThis();
         assertEquals("This_pk", entityThis.primaryKeyColumnName());
     }
 
-    /**
-     * This method tests that primaryKeyColumnIndex() returns the correct value.
-     */
     @Test
     public void primaryKeyColumnIndexReturnsCorrectValueWhenCalled() {
         EntityThis entityThis = new EntityThis();
         assertEquals(0, entityThis.primaryKeyColumnIndex());
     }
 
-    /**
-     * This method tests that primaryKey() returns the correct value.
-     */
     @Test
     public void primaryKeyReturnsCorrectValueWhenCalled() {
         EntityThis entityThis = new EntityThis();
@@ -38,5 +32,26 @@ public class EntityThisTest {
         assertEquals(1, entityThis.primaryKey());
     }
 
-    
+    @Test
+    public void createStoresInstanceVariablesInTableWhenCalled(){
+        EntityThis entityThis = new EntityThis();
+        entityThis.setAbc("abc");
+        entityThis.setDef(25);
+        java.util.Date date = new java.util.Date();
+        entityThis.setGhi(date);
+        JKLValues jkl = JKLValues.X;
+        entityThis.setJkl(jkl);
+        boolean createRetVal = entityThis.create();
+        if(createRetVal){
+            entityThis.read(entityThis.primaryKey());
+            assertEquals("abc", entityThis.getAbc());
+            assertEquals(25, entityThis.getDef());
+            assertEquals(date, entityThis.getGhi());
+            assertEquals(jkl, entityThis.getJkl());
+        } else {
+            fail("create() returned false, the insert statement threw an exception");
+        }
+
+        
+    }
 }

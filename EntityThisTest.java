@@ -51,7 +51,40 @@ public class EntityThisTest {
         } else {
             fail("create() returned false, the insert statement threw an exception");
         }
+    }
 
-        
+    @Test
+    public void createThrowsExceptionWhenCalledWithExisitingPK(){
+        EntityThis entityThis = new EntityThis();
+        entityThis.read(2);
+        assertFalse(entityThis.create());
+    }
+
+    @Test
+    public void readInstanceContainsCorrectValuesWhenCalled(){
+        EntityThis entityThis = new EntityThis();
+        entityThis.setAbc("abc");
+        entityThis.setDef(25);
+        java.util.Date date = new java.util.Date();
+        entityThis.setGhi(date);
+        JKLValues jkl = JKLValues.X;
+        entityThis.setJkl(jkl);
+        boolean createRetVal = entityThis.create();
+        if(createRetVal){
+            entityThis.setAbc("ABC");
+            entityThis.setDef(26);
+            java.util.Date date2 = new java.util.Date();
+            entityThis.setGhi(date2);
+            JKLValues jkl2 = JKLValues.Y;
+            entityThis.setJkl(jkl2);
+            entityThis.read(entityThis.primaryKey());
+            assertEquals("abc", entityThis.getAbc());
+            assertEquals(25, entityThis.getDef());
+            assertEquals(date, entityThis.getGhi());
+            assertEquals(jkl, entityThis.getJkl());
+        } else {
+            fail("create() returned false, the insert statement threw an exception");
+        }
     }
 }
+

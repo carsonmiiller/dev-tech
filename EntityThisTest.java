@@ -139,6 +139,59 @@ public class EntityThisTest {
         assertFalse(entityThis.delete());
     }
     
+    @Test
+    public void saveCreatesRecordWhenPKEqualsZero(){
+        EntityThis entityThis = new EntityThis();
+        entityThis.setAbc("abc");
+        entityThis.setDef(25);
+        java.util.Date date = new java.util.Date();
+        entityThis.setGhi(date);
+        JKLValues jkl = JKLValues.X;
+        entityThis.setJkl(jkl);
+        entityThis.save();
+        
+        String newAbc = entityThis.getAbc() + "abc";
+        entityThis.setAbc(newAbc);
+        int newDef = entityThis.getDef() + 1;
+        entityThis.setDef(newDef);
+        java.util.Date newDate = new java.util.Date();
+        entityThis.setGhi(newDate);
+        JKLValues newJkl = JKLValues[entityThis.getJkl().ordinal() + 1]; // making an assumption about enum syntax and operation here
+        entityThis.setJkl(newJkl);
 
+        entityThis.read(entityThis.primaryKey());
+        assertEquals("abc", entityThis.getAbc());
+        assertEquals(25, entityThis.getDef());
+        assertEquals(date, entityThis.getGhi());
+        assertEquals(jkl, entityThis.getJkl());
+    }
+
+    @Test
+    public void saveUpdatesRecordWhenPKEqualsNonZero(){
+        EntityThis entityThis = new EntityThis();
+        entityThis.read(2);
+        entityThis.setAbc("abc");
+        entityThis.setDef(25);
+        java.util.Date date = new java.util.Date();
+        entityThis.setGhi(date);
+        JKLValues jkl = JKLValues.X;
+        entityThis.setJkl(jkl);
+        entityThis.save();
+        
+        String newAbc = entityThis.getAbc() + "abc";
+        entityThis.setAbc(newAbc);
+        int newDef = entityThis.getDef() + 1;
+        entityThis.setDef(newDef);
+        java.util.Date newDate = new java.util.Date();
+        entityThis.setGhi(newDate);
+        JKLValues newJkl = JKLValues[entityThis.getJkl().ordinal() + 1]; // making an assumption about enum syntax and operation here
+        entityThis.setJkl(newJkl);
+
+        entityThis.read(entityThis.primaryKey());
+        assertEquals("abc", entityThis.getAbc());
+        assertEquals(25, entityThis.getDef());
+        assertEquals(date, entityThis.getGhi());
+        assertEquals(jkl, entityThis.getJkl());
+    }
 }
 
